@@ -29,7 +29,7 @@ import { generate } from "voucher-code-generator";
 import { setCouponCode } from "../app/coupon";
 import { useDispatch, useSelector } from "react-redux";
 import PhoneInputField from "../components/PhoneNumber";
-import background from "../assets/bg.jpg";
+import background from "../assets/gray.png";
 import { MySvg } from "../assets/svgComp";
 import { CouponRateSvg } from "../assets/CouponRateComp";
 import { MotionConfig, motion } from "framer-motion";
@@ -98,19 +98,19 @@ const IntroComp = () => {
   // }
 
   //read
-  useEffect(() => {
-    const readData = query(collection(db, "user"));
-    const unsubscribe = onSnapshot(readData, (querySnapshot) => {
-      let usersArr = [];
-      //doc can be named anything
-      querySnapshot.forEach((doc) => {
-        usersArr.push({ ...doc.data(), id: doc.id });
-      });
-      setUsers(usersArr);
-      // console.log(users);
-    });
-    return () => unsubscribe();
-  }, []);
+  // useEffect(() => {
+  //   const readData = query(collection(db, "user"));
+  //   const unsubscribe = onSnapshot(readData, (querySnapshot) => {
+  //     let usersArr = [];
+  //     //doc can be named anything
+  //     querySnapshot.forEach((doc) => {
+  //       usersArr.push({ ...doc.data(), id: doc.id });
+  //     });
+  //     setUsers(usersArr);
+  //     // console.log(users);
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
 
   //update
   const couponUsed = async (users) => {
@@ -170,7 +170,7 @@ const IntroComp = () => {
     <div>
       <div className="w-full">
         <div
-          className="w-full space-y-8 h-full lg:h-screen"
+          className="w-full space-y-8 h-full lg:h-screen bg-cover"
           style={{ backgroundImage: `url(${background})` }}
         >
           <div className="pt-10">
@@ -262,8 +262,8 @@ const IntroComp = () => {
                   className="container"
                 >
                   <div style={divStyle1} className="rounded-md flex lg:h-[400px] flex-col gap-y-5 lg:gap-y-2 shadow-sm -space-y-px">
-                    <Input {...email_validation} />
                     <Input {...name_validation} />
+                    <Input {...email_validation} />
                     <PhoneInputField
                       {...cell_validation}
                       control={control}

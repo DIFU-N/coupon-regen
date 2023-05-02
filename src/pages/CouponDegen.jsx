@@ -26,10 +26,10 @@ const CouponDegen = () => {
 
   function handleClick() {
     const isCodeText = document.querySelector(".is-code-text");
+    counterRef.current?.startAnimation();
     isCodeText.classList.add("is-active");
     // const showText = document.querySelector(".hidden-text");
     // showText.classList.remove("hidden");
-    counterRef.current?.startAnimation();
   }
   return (
     <div className="text-black">
@@ -41,14 +41,14 @@ const CouponDegen = () => {
       ) : (
         // backgroundImage: `url(${background})`
         <div
-          style={{ divStyle1 }}
+          style={{divStyle1, backgroundImage: `url(${background})`}}
           className="w-full h-screen flex bg-gray-600 flex-col gap-y-16 lg:gap-y-28  items-center"
         >
-          <div className="justify-center mt-9 md:mx-20">
-            <p className="text-3xl font-bold mx-9 md:text-5xl text-center pb-5">
+          <div className="justify-center mt-9 md:mx-20 lg:border-2 lg:border-gray-900 lg:rounded-md lg:mx-[20%]">
+            <p className="text-3xl font-bold mx-9 md:text-5xl text-center lg:text-3xl pb-5 lg:border-b-2 lg:pb-2 lg:mb-2 lg:border-gray-900">
               Rules for the Coupon Retrieval
             </p>
-            <ul className="list-disc list-inside mx-5 text-xl md:text-2xl font-semibold">
+            <ul className="list-disc list-inside mx-5 text-xl md:text-2xl lg:text-xl font-semibold">
               <li>
                 The discount code cannot be redeemed immediately upon receipt.
                 It can only be used on your next purchase.
@@ -77,7 +77,7 @@ const CouponDegen = () => {
               <p>Click To Reveal Your Coupon Code</p>
             </div>
             <div className="hero-body">
-              <button className="button has-code" onClick={handleClick}>
+              <button className="button has-code" onClick={handleClick} onMouseOver={handleClick}>
                 <span className="is-code text-3xl text-black">
                   <SlotCounter
                     ref={counterRef}

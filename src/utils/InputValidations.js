@@ -3,16 +3,16 @@ export const name_validation = {
     label: 'name',
     type: 'text',
     id: 'name',
-    placeholder: 'write your name ...',
+    placeholder: 'Enter your Full Name',
     validation: {
         required: {
             value: true,
             message: 'required',
         },
-        maxLength: {
-            value: 30,
-            message: '30 characters max',
-        },
+        // maxLength: {
+        //     value: 30,
+        //     message: '30 characters max',
+        // },
     },
 }
 
