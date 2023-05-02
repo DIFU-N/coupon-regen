@@ -1,0 +1,35 @@
+.square-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .square {
+    width: 400px;
+    height: 400px;
+    background-image: url('/src/assets/genesis\ G\ .png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    animation: flip 2s infinite;
+  }
+  
+  @keyframes flip {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    25% {
+      transform: rotateX(180deg) rotateY(0deg);
+    }
+    50% {
+      transform: rotateX(180deg) rotateY(180deg);
+    }
+    75% {
+      transform: rotateX(0deg) rotateY(180deg);
+    }
+    100% {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+  }
+  
