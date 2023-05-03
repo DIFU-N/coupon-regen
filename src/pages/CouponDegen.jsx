@@ -1,8 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
-import SlotCounter from "react-slot-counter";
-import Loader from "../components/swirl/loader";
-import { useSelector } from "react-redux";
-import background from "../assets/bg.jpg";
+import React, {useRef, useState, useEffect} from 'react';
+import SlotCounter from 'react-slot-counter';
+import Loader from '../components/swirl/loader';
+import {useSelector} from 'react-redux';
+import background from '../assets/bg.jpg';
 
 const CouponDegen = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,15 +19,15 @@ const CouponDegen = () => {
   };
   const divStyle1 = {
     // fontFamily: "Anton, sans-serif",
-    fontFamily: "Bebas Neue, cursive",
+    fontFamily: 'Bebas Neue, cursive',
     // fontFamily: 'Barlow, sans-serif'
   };
   const counterRef = useRef(null);
 
   function handleClick() {
-    const isCodeText = document.querySelector(".is-code-text");
+    const isCodeText = document.querySelector('.is-code-text');
     counterRef.current?.startAnimation();
-    isCodeText.classList.add("is-active");
+    isCodeText.classList.add('is-active');
     // const showText = document.querySelector(".hidden-text");
     // showText.classList.remove("hidden");
   }

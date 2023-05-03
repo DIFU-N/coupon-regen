@@ -14,7 +14,7 @@ export const name_validation = {
         //     message: '30 characters max',
         // },
     },
-}
+};
 
 export const email_validation = {
     name: 'email',
@@ -29,14 +29,14 @@ export const email_validation = {
         },
 
     },
-}
+};
 
 export const cell_validation = {
     name: 'cell',
     label: 'phone number',
     type: 'string',
     id: 'cell',
-}
+};
 
 // validation: {
 //     required: {
@@ -56,14 +56,14 @@ export const gender_validation = {
     name: 'gender',
     label: 'gender',
     id: 'gender',
-    options: ["Female", "Male", "Other"],
+    options: ['Female', 'Male', 'Other'],
     validation: {
         required: {
             value: true,
             message: 'required',
         },
     },
-}
+};
 
 export const date_validation = {
     name: 'birthday',
@@ -75,4 +75,4 @@ export const date_validation = {
             message: 'required',
         },
     },
-}
+};

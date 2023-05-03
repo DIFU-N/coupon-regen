@@ -1,17 +1,17 @@
-import { AnimatePresence } from 'framer-motion'
-import React from 'react'
-import { useFormContext } from 'react-hook-form'
-import { findInputError } from '../utils/FindInputError'
-import { IsFormInvalid } from '../utils/IsFormInvalid'
-import InputError from './InputError'
+import {AnimatePresence} from 'framer-motion';
+import React from 'react';
+import {useFormContext} from 'react-hook-form';
+import {findInputError} from '../utils/FindInputError';
+import {IsFormInvalid} from '../utils/IsFormInvalid';
+import InputError from './InputError';
 
-const Input = ({ label, type, id, placeholder, validation, name }) => {
+const Input = ({label, type, id, placeholder, validation, name}) => {
     const {
         register,
-        formState: { errors },
-      } = useFormContext()
-    const inputError = findInputError(errors, name)
-    const isInvalid = IsFormInvalid(inputError)
+        formState: {errors},
+      } = useFormContext();
+    const inputError = findInputError(errors, name);
+    const isInvalid = IsFormInvalid(inputError);
     return (
         <div className="flex flex-col w-full gap-2">
             <div className="flex justify-between">
@@ -36,7 +36,7 @@ const Input = ({ label, type, id, placeholder, validation, name }) => {
                 {...register(name, validation)}
             />
         </div>
-    )
-}
+    );
+};
 
-export default Input
+export default Input;

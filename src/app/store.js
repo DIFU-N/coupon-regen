@@ -1,14 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { couponSlice } from "./coupon";
-import { validateSlice } from "./validate";
-import { authSlice } from "./auth";
+import {configureStore} from '@reduxjs/toolkit';
+import {couponSlice} from './coupon';
+import {validateSlice} from './validate';
+import {authSlice} from './auth';
 
 const store = configureStore({
     reducer: {
         coupon: couponSlice.reducer,
         validate: validateSlice.reducer,
-        auth: authSlice.reducer
-    }
-})
+        auth: authSlice.reducer,
+    },
+});
 
 export default store;

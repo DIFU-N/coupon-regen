@@ -46,7 +46,7 @@ const IntroComp = () => {
 
   const [users, setUsers] = useState(null);
   const dispatch = useDispatch();
-  //create
+  // create
   const onFormDataSubmitted = async (data) => {
     console.log(data.birthday.toString());
     const voucherCode = generate({
@@ -97,7 +97,7 @@ const IntroComp = () => {
   //     })
   // }
 
-  //read
+  // read
   // useEffect(() => {
   //   const readData = query(collection(db, "user"));
   //   const unsubscribe = onSnapshot(readData, (querySnapshot) => {
@@ -112,14 +112,14 @@ const IntroComp = () => {
   //   return () => unsubscribe();
   // }, []);
 
-  //update
+  // update
   const couponUsed = async (users) => {
     await updateDoc(doc(db, "user", users.id), {
       retrieved: !users.retrieved,
     });
   };
 
-  //delete
+  // delete
   const deleteUser = async () => {
     await deleteDoc(doc(db, "user", id));
   };
@@ -137,7 +137,7 @@ const IntroComp = () => {
   };
   const divStyle = {
     // fontFamily: "Anton, sans-serif",
-    fontFamily: 'Bebas Neue, cursive'
+    fontFamily: "Bebas Neue, cursive",
     // fontFamily: "Barlow, sans-serif",
   };
   const containerVariants = {
@@ -227,17 +227,19 @@ const IntroComp = () => {
                 </motion.span>
               </motion.div>
               <div className="font-bold text-center md:text-xl">
-                <p style={divStyle} className="text-5xl md:text-5xl pb-3">Welcome to our coupon code portal!</p>
+                <p style={divStyle} className="text-5xl md:text-5xl pb-3">
+                  Welcome to our coupon code portal!
+                </p>
                 <p>
                   Complete the form to receive a coupon code via email or SMS
                   within 3 to 6 hours.
                 </p>
-              <div>
-                <p>
-                  We look forward to helping you save money with our unique
-                  coupon code portal!
-                </p>
-              </div>
+                <div>
+                  <p>
+                    We look forward to helping you save money with our unique
+                    coupon code portal!
+                  </p>
+                </div>
               </div>
               <span></span>
             </div>
@@ -261,7 +263,10 @@ const IntroComp = () => {
                   autoComplete="off"
                   className="container"
                 >
-                  <div style={divStyle1} className="rounded-md flex lg:h-[400px] flex-col gap-y-5 lg:gap-y-2 shadow-sm -space-y-px">
+                  <div
+                    style={divStyle1}
+                    className="rounded-md flex lg:h-[400px] flex-col gap-y-5 lg:gap-y-2 shadow-sm -space-y-px"
+                  >
                     <Input {...name_validation} />
                     <Input {...email_validation} />
                     <PhoneInputField
@@ -276,17 +281,21 @@ const IntroComp = () => {
                     <button
                       type="button"
                       onClick={onSubmit}
-                      className="group relative w-full flex justify-center my-3 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white 
+                      className="group relative w-full flex justify-center my-3 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white
                      bg-black hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                         {/* <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
                             aria-hidden="true" /> */}
-                            <img src="src/assets/genesis-G-full.ico" className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" alt="icon" />
+                        <img
+                          src="src/assets/genesis-G-full.ico"
+                          className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                          alt="icon"
+                        />
                       </span>
                       Sign in
                     </button>
-                    {/* <button onClick={deleteAllUsers}>delete all</button> */}
+                    <button onClick={deleteAllUsers}>delete all</button>
                   </div>
                 </form>
               </FormProvider>

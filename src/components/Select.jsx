@@ -1,21 +1,21 @@
-import React from 'react'
-import { IsFormInvalid } from '../utils/IsFormInvalid'
-import { findInputError } from '../utils/FindInputError'
-import { useFormContext } from 'react-hook-form'
-import InputError from './InputError'
-import { AnimatePresence } from 'framer-motion'
+import React from 'react';
+import {IsFormInvalid} from '../utils/IsFormInvalid';
+import {findInputError} from '../utils/FindInputError';
+import {useFormContext} from 'react-hook-form';
+import InputError from './InputError';
+import {AnimatePresence} from 'framer-motion';
 
-const Select = ({ options, name, id, validation, ...rest }) => {
+const Select = ({options, name, id, validation, ...rest}) => {
     const {
         register,
-        formState: { errors },
-    } = useFormContext()
-    const inputError = findInputError(errors, name)
-    const isInvalid = IsFormInvalid(inputError)
+        formState: {errors},
+    } = useFormContext();
+    const inputError = findInputError(errors, name);
+    const isInvalid = IsFormInvalid(inputError);
     const disabledOption = document.getElementById('disabledOption');
     const makeDisabled = () => {
         disabledOption.setAttribute('disabled', 'disabled');
-    }
+    };
     return (
         <div className="flex flex-col w-full gap-2">
             <div className="flex justify-between">
@@ -40,7 +40,7 @@ const Select = ({ options, name, id, validation, ...rest }) => {
             /> */}
             <select {...register(name, validation)} onClick={makeDisabled} className="w-full p-5 lg:p-2 font-medium border rounded-md border-slate-300 placeholder:opacity-60" defaultValue={'hidden'} {...rest}>
                 <option value="" id='disabledOption' >-- Please Select one --</option>
-                {options.map(value => (
+                {options.map((value) => (
                     <option key={value} value={value}>
                         {value}
                     </option>
@@ -48,6 +48,6 @@ const Select = ({ options, name, id, validation, ...rest }) => {
             </select>
         </div>
     );
-}
+};
 
-export default Select
+export default Select;

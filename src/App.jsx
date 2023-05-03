@@ -1,10 +1,10 @@
-import React from 'react'
-import IntroComp from './pages/IntroComp'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import CouponDegen from './pages/CouponDegen'
-import AdminAuth from './pages/auth/AdminAuth'
-import AdminComp from './pages/AdminComp'
-import Admin from './pages/auth/Admin'
+import React from 'react';
+import IntroComp from './pages/IntroComp';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import CouponDegen from './pages/CouponDegen';
+import AdminAuth from './pages/auth/AdminAuth';
+import AdminComp from './pages/AdminComp';
+import Admin from './pages/auth/Admin';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         {/* <Route path='/admin' element={<AdminComp />} /> */}
       </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

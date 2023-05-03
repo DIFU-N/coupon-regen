@@ -1,5 +1,5 @@
 import React from 'react';
-import "./swirl.css";
+import './swirl.css';
 // import "...0/"
 const Swirl = () => {
     return (
@@ -22,7 +22,7 @@ const Swirl = () => {
                 <div></div> */}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Swirl;

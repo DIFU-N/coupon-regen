@@ -1,14 +1,14 @@
-import { MotionConfig, motion } from 'framer-motion'
-import React from 'react'
+import {MotionConfig, motion} from 'framer-motion';
+import React from 'react';
 
 const framer_error = {
-    initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 10 },
-    transition: { duration: 0.2 },
-}
+    initial: {opacity: 0, y: 10},
+    animate: {opacity: 1, y: 0},
+    exit: {opacity: 0, y: 10},
+    transition: {duration: 0.2},
+};
 
-const InputError = ({ message }) => {
+const InputError = ({message}) => {
     return (
         <MotionConfig>
             <motion.p
@@ -19,7 +19,7 @@ const InputError = ({ message }) => {
                 {message}
             </motion.p>
         </MotionConfig>
-    )
-}
+    );
+};
 
-export default InputError
+export default InputError;

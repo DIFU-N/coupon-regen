@@ -1,12 +1,12 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
-import { auth } from "../../firebase";
-import { useDispatch } from "react-redux";
-import { setAuthUser } from "../../app/auth";
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import React, {useState} from 'react';
+import {auth} from '../../firebase';
+import {useDispatch} from 'react-redux';
+import {setAuthUser} from '../../app/auth';
 
 const AdminAuth = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const signIn = (e) => {
     e.preventDefault();
@@ -16,8 +16,8 @@ const AdminAuth = () => {
       dispatch(setAuthUser(userCredential.user.uid));
     }).catch((error) => {
       console.log(error);
-    })
-  }
+    });
+  };
   return (
     <div className="bg-[#eae2e2] flex h-screen px-10 justify-center items-center">
       <div className="bg-white p-5 w-full md:w-[600px] lg:w-[400px] flex flex-col gap-y-5 py-5 rounded-md">

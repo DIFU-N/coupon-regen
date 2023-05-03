@@ -1,5 +1,5 @@
-import React from 'react'
-import "./loader.css"
+import React from 'react';
+import './loader.css';
 
 
 const Loader = () => {
@@ -9,7 +9,7 @@ const Loader = () => {
             <div className="square"></div>
         </div>
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;
