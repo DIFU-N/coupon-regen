@@ -29,10 +29,14 @@ import { generate } from "voucher-code-generator";
 import { setCouponCode } from "../app/coupon";
 import { useDispatch, useSelector } from "react-redux";
 import PhoneInputField from "../components/PhoneNumber";
-import background from "../assets/gray.png";
+import background from "../assets/WebpageG.png";
 import { MySvg } from "../assets/svgComp";
 import { CouponRateSvg } from "../assets/CouponRateComp";
 import { MotionConfig, motion } from "framer-motion";
+import * as firebase from 'firebase/app';
+import 'firebase/functions';
+import { firebaseConfig } from "../firebase";
+import sendSMS from "../utils/SendSMS";
 
 const IntroComp = () => {
   const navigate = useNavigate();
@@ -166,6 +170,21 @@ const IntroComp = () => {
       },
     },
   };
+  firebase.initializeApp(firebaseConfig);
+  const sendEmail = async () => {
+    const sendEmailFunction = firebase.functions().httpsCallable('sendEmail');
+    const result = await sendEmailFunction({ 
+      toEmail: "desktopsupport.qsr@genesisgroupng.com", 
+      toName: "Testing", 
+      subject: "testing", 
+      textPart: "test text", 
+      htmlPart: "html part?" });
+    console.log(result);
+  };
+  const sendSMSfxn = async () => {
+    const result = await sendSMS({ to: '08087606050', text: 'Stay Awesome.' });
+  console.log(result);
+  }
   return (
     <div>
       <div className="w-full">
@@ -185,10 +204,10 @@ const IntroComp = () => {
           <div className="grid grid-row gap-10 mx-3 pb-10 lg:grid-cols-2">
             <div
               style={divStyle1}
-              className="flex mx-3 gap-3 font-medium text-2xl text-black flex-col"
+              className="flex mx-3 mt-[50%] gap-3 font-medium text-2xl text-black flex-col"
             >
-              <MySvg className="mx-auto hidden lg:block justify-center h-16 w-auto" />
-              <motion.div
+              {/* <MySvg className="mx-auto hidden lg:block justify-center h-16 w-auto" /> */}
+              {/* <motion.div
                 className="flex flex-col items-center justify-center"
                 initial={{ y: -100 }}
                 animate={{
@@ -225,7 +244,7 @@ const IntroComp = () => {
                 >
                   Coupon Code
                 </motion.span>
-              </motion.div>
+              </motion.div> */}
               <div className="font-bold text-center md:text-xl">
                 <p style={divStyle} className="text-5xl md:text-5xl pb-3">
                   Welcome to our coupon code portal!
@@ -295,7 +314,7 @@ const IntroComp = () => {
                       </span>
                       Sign in
                     </button>
-                    <button onClick={deleteAllUsers}>delete all</button>
+                    <button onClick={sendSMSfxn}>delete all</button>
                   </div>
                 </form>
               </FormProvider>

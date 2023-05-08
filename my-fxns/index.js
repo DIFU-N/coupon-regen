@@ -1,4 +1,4 @@
-const functions = require("firebase-functions");
+// const functions = require("firebase-functions");
 
 // // Create and deploy your first functions
 // // https://firebase.google.com/docs/functions/get-started
@@ -7,33 +7,44 @@ const functions = require("firebase-functions");
 //   functions.logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+const API_KEY = process.env.VITE_MAILJET_API_KEY;
+const API_SECRET = process.env.VITE_MAILJET_API_SECRET;
+const functions = require("firebase-functions");
+const mailjet = require("node-mailjet").connect(API_KEY, API_SECRET);
+const admin = require('firebase-admin');
 
-const mailjet = require("node-mailjet").connect(
-	functions.config().mailjet.key,
-	functions.config().mailjet.secret
-);
+// Initialize Firebase Admin SDK
+admin.initializeApp(functions.config().firebase);
+
 exports.sendEmail = functions.https.onCall(async (data, context) => {
-	// const { to, subject, text } = data;
+  const {toEmail, toName, subject, textPart, htmlPart} = data;
 
-	const request = mailjet.post("send", { version: "v3.1" }).request({
-		Messages: [
-			{
-				From: { Email: "software.support@genesisgroupng.com" },
-				To: [{ Email: "desktopsupport.qsr@genesisgroupng.com" }],
-				Subject: "Test Subject",
-				TextPart: "Test Text"
-			}
-		]
-	});
+  const request = mailjet.post("send", {version: "v3.1"}).request({
+    Messages: [
+      {
+        From: {
+          Email: "software.support@genesisgroupng.com",
+          Name: "Your Name",
+        },
+        To: [
+          {
+            Email: toEmail,
+            Name: toName,
+          },
+        ],
+        Subject: subject,
+        TextPart: textPart,
+        HTMLPart: htmlPart,
+      },
+    ],
+  });
 
-	try {
-		await request;
-		return { message: "Email sent successfully!" };
-	} catch (error) {
-		throw new functions.https.HttpsError(
-			"internal",
-			"Email could not be sent.",
-			error
-		);
-	}
+  try {
+    const result = await request;
+    console.log(result);
+    return {success: true};
+  } catch (error) {
+    console.log(error);
+    return {success: false};
+  }
 });

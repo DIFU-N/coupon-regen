@@ -1,52 +1,39 @@
-import mailjet from "node-mailjet";
+// import Mailjet from "node-mailjet";
 
-// const [email, setEmail] = useState("");
-// const [message, setMessage] = useState("");
-
-// export const handleEmailChange = (e) => {
-//   setEmail(e.target.value);
-// };
-
-// export const handleMessageChange = (e) => {
-//   setMessage(e.target.value);
-// };
 const API_KEY = import.meta.env.VITE_MAILJET_API_KEY;
 const API_SECRET = import.meta.env.VITE_MAILJET_API_SECRET;
-export const handleSubmit = async (e) => {
-  e.preventDefault();
-  // Replace with your own credentials
-  const apiKey = API_KEY;
-  const apiSecret = API_SECRET;
-  // Create a Mailjet client instance
-  const client = mailjet.connect(apiKey, apiSecret);
-  // Create a request object
-  const request = {
+const functions = require("firebase-functions");
+const mailjet = require("node-mailjet").connect(API_KEY, API_SECRET);
+
+exports.sendEmail = functions.https.onCall(async (data, context) => {
+  const { toEmail, toName, subject, textPart, htmlPart } = data;
+
+  const request = mailjet.post("send", { version: "v3.1" }).request({
     Messages: [
       {
         From: {
           Email: "software.support@genesisgroupng.com",
-          Name: "Software Support",
+          Name: "Your Name",
         },
         To: [
           {
-            Email: "genesisgroop@gmail.com",
-            Name: "Genesis Groop",
+            Email: toEmail,
+            Name: toName,
           },
         ],
-        Subject: "Mailjet Demo",
-        TextPart: "Test Mail",
+        Subject: subject,
+        TextPart: textPart,
+        HTMLPart: htmlPart,
       },
     ],
-  };
-  // Send the request using the post method
+  });
+
   try {
-    const response = await client
-      .post("send", { version: "v3.1" })
-      .request(request);
-    console.log(response.body);
-    alert("Email sent successfully!");
+    const result = await request;
+    console.log(result);
+    return { success: true };
   } catch (error) {
-    console.error(error.statusCode);
-    alert("Email failed to send!");
+    console.log(error);
+    return { success: false };
   }
-};
+});
