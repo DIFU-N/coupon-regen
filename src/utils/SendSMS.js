@@ -5,11 +5,12 @@ const SMS_API_TOKEN = import.meta.env.VITE_SMS_API_TOKEN
 const SMS_SENDER = import.meta.env.VITE_SMS_SENDER
 console.log(SMS_API_URL);
 const axiosInstance = axios.create({
-  baseURL: 'https://127.0.0.1:8000',
+  baseURL: 'https://127.0.0.1:8000/',
   withCredentials: true,
   headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    // 'Content-Type': 'application/json',
+    // 'Accept': 'application/json',
+    'Content-Type': 'multipart/form-data',
     'Authorization': `Bearer ${SMS_API_TOKEN}`
   }
 });
@@ -17,27 +18,34 @@ const axiosInstance = axios.create({
 
 const sendSMS = async ({ to, text, type = 0, routing = 3, ref_id = null, simserver_token = null, dlr_timeout = null, schedule = null }) => {
   try {
-    const response = await axiosInstance.request({
-      method: 'post',
-      url: '/sms-proxy',
-      data: {
-        token: SMS_API_TOKEN,
-        sender: SMS_SENDER,
-        to: to,
-        message: text,
-        type: type,
-        routing: routing,
-        ref_id: ref_id,
-        simserver_token: simserver_token,
-        dlr_timeout: dlr_timeout,
-        schedule: schedule
-      }
-    });
+    const formData = new FormData();
+    formData.append('token', SMS_API_TOKEN);
+    formData.append('sender', SMS_SENDER);
+    formData.append('to', to);
+    formData.append('message', text);
+    formData.append('type', type);
+    formData.append('routing', routing);
+    formData.append('ref_id', ref_id);
+    formData.append('simserver_token', simserver_token);
+    formData.append('dlr_timeout', dlr_timeout);
+    formData.append('schedule', schedule);
 
-    return response.data;
+    // const response = await axiosInstance.request({
+    //   method: 'post',
+    //   url: '/sms-proxy',
+    //   data: formData
+    // });
+    const response = await axiosInstance.post('/sms-proxy', formData)
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
+    } else {
+      throw new Error(`SMS sending failed with status code ${response.status}`);
+    }
+    // return response.data;
   } catch (error) {
     console.error(error);
-    return null;
+    throw new Error(`SMS sending failed: ${error.message}`);
+    // return null;
   }
 };
 export default sendSMS;
