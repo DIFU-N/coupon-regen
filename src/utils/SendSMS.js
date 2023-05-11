@@ -15,8 +15,7 @@ const axiosInstance = axios.create({
   }
 });
 
-
-const sendSMS = async ({ to, text, type = 0, routing = 3, ref_id = null, simserver_token = null, dlr_timeout = null, schedule = null }) => {
+const sendSMS = async ({ to, text, type = 0, routing = 3, ref_id = null, simserver_token = null, dlr_timeout = null, schedule = '2023-05-11 14:13' }) => {
   try {
     const formData = new FormData();
     formData.append('token', SMS_API_TOKEN);
@@ -26,9 +25,9 @@ const sendSMS = async ({ to, text, type = 0, routing = 3, ref_id = null, simserv
     formData.append('type', type);
     formData.append('routing', routing);
     formData.append('ref_id', ref_id);
-    formData.append('simserver_token', simserver_token);
+    // formData.append('simserver_token', simserver_token);
     formData.append('dlr_timeout', dlr_timeout);
-    formData.append('schedule', schedule);
+    // formData.append('schedule', schedule);
 
     // const response = await axiosInstance.request({
     //   method: 'post',

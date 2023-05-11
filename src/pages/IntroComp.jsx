@@ -182,7 +182,7 @@ const IntroComp = () => {
     console.log(result);
   };
   const sendSMSfxn = async () => {
-    const result = await sendSMS({ to: '08087606050', text: 'Stay Awesome.' })
+    const result = await sendSMS({ to: '09067711380', text: 'Stay Awesome.' })
     .then((data) => console.log(data))
   .catch((error) => console.error(error));
   console.log(result);
