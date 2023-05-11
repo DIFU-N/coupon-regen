@@ -5,6 +5,10 @@ import CouponDegen from './pages/CouponDegen';
 import AdminAuth from './pages/auth/AdminAuth';
 import AdminComp from './pages/AdminComp';
 import Admin from './pages/auth/Admin';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.withCredentials = true;
 
 function App() {
   return (

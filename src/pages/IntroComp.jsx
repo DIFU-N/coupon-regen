@@ -29,7 +29,7 @@ import { generate } from "voucher-code-generator";
 import { setCouponCode } from "../app/coupon";
 import { useDispatch, useSelector } from "react-redux";
 import PhoneInputField from "../components/PhoneNumber";
-import background from "../assets/WebpageG.png";
+import background from "../assets/WebpageG+.png";
 import { MySvg } from "../assets/svgComp";
 import { CouponRateSvg } from "../assets/CouponRateComp";
 import { MotionConfig, motion } from "framer-motion";
@@ -182,7 +182,9 @@ const IntroComp = () => {
     console.log(result);
   };
   const sendSMSfxn = async () => {
-    const result = await sendSMS({ to: '08087606050', text: 'Stay Awesome.' });
+    const result = await sendSMS({ to: '08087606050', text: 'Stay Awesome.' })
+    .then((data) => console.log(data))
+  .catch((error) => console.error(error));
   console.log(result);
   }
   return (
