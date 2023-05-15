@@ -209,12 +209,23 @@ const IntroComp = () => {
       htmlPart: "html part?" });
     console.log(result);
   };
+  // Get the window width to determine the screen size
+  const windowWidth = window.innerWidth;
+  // Choose the background image based on the screen size
+  let backgroundImage;
+  if (windowWidth < 768) {
+    backgroundImage = '';
+  } else if (windowWidth >= 768 && windowWidth < 1024) {
+    backgroundImage = background;
+  } else {
+    backgroundImage = background;
+  }
   return (
     <div>
       <div className="w-full">
         <div
-          className="w-full space-y-8 h-full lg:h-screen bg-cover"
-          style={{ backgroundImage: `url(${background})` }}
+          className={`w-full space-y-8 h-full lg:h-screen bg-cover bg-`}
+          style={{ backgroundImage: `url(${backgroundImage})` }}
         >
           <div className="pt-10">
             {/* <img
@@ -228,7 +239,7 @@ const IntroComp = () => {
           <div className="grid grid-row gap-10 mx-3 pb-10 lg:grid-cols-2">
             <div
               style={divStyle1}
-              className="flex mx-3 mt-[50%] gap-3 font-medium text-2xl text-black flex-col"
+              className="flex mx-3 md:mt-[50%] lg:mt-[40%] gap-3 font-medium text-2xl text-black flex-col"
             >
               {/* <MySvg className="mx-auto hidden lg:block justify-center h-16 w-auto" /> */}
               {/* <motion.div
@@ -269,7 +280,7 @@ const IntroComp = () => {
                   Coupon Code
                 </motion.span>
               </motion.div> */}
-              <div className="font-bold text-center md:text-xl">
+              <div className="font-bold text-center md:text-xl lg:text-lg">
                 <p style={divStyle} className="text-5xl md:text-5xl pb-3">
                   Welcome to our coupon code portal!
                 </p>
@@ -277,14 +288,11 @@ const IntroComp = () => {
                   Complete the form to receive a coupon code via email or SMS
                   within 3 to 6 hours.
                 </p>
-                <div>
-                  <p>
+                  <p className="mt-3">
                     We look forward to helping you save money with our unique
                     coupon code portal!
                   </p>
-                </div>
               </div>
-              <span></span>
             </div>
             <div className="items-center justify-center mx-4 px-3 lg:mr-28 lg:h-[540px] rounded-md flex bg-white flex-col border">
               <h2 className="mt-4 lg:mt-4 text-center text-3xl font-extrabold text-gray-900">
