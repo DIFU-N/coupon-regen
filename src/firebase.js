@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const API_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
-console.log(API_KEY);
+
 export const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: "coupon-90961.firebaseapp.com",

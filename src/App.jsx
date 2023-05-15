@@ -21,8 +21,8 @@ function App() {
       <Routes>
         <Route path='/' element={<IntroComp />} />
         <Route path='/coupon-degen' element={<CouponDegen />} />
-        {/* <Route path='/' element={<Admin />} /> */}
-        {/* <Route path='/admin' element={<AdminComp />} /> */}
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/admin' element={<AdminComp />} />
       </Routes>
     </Router>
   );

@@ -19,8 +19,8 @@ const CouponDegen = () => {
   };
   const divStyle1 = {
     // fontFamily: "Anton, sans-serif",
-    fontFamily: 'Bebas Neue, cursive',
-    // fontFamily: 'Barlow, sans-serif'
+    // fontFamily: 'Bebas Neue, cursive',
+    fontFamily: 'Barlow, sans-serif'
   };
   const counterRef = useRef(null);
 
@@ -41,38 +41,41 @@ const CouponDegen = () => {
       ) : (
         // backgroundImage: `url(${background})`
         <div
-          style={{divStyle1, backgroundImage: `url(${background})`}}
-          className="w-full h-screen flex bg-gray-600 flex-col gap-y-16 lg:gap-y-28  items-center"
+          style={divStyle1}
+          className="w-full h-screen flex flex-col gap-y-16 lg:gap-y-28  items-center"
         >
-          <div className="justify-center mt-9 md:mx-20 lg:border-2 lg:border-gray-900 lg:rounded-md lg:mx-[20%]">
-            <p className="text-3xl font-bold mx-9 md:text-5xl text-center lg:text-3xl pb-5 lg:border-b-2 lg:pb-2 lg:mb-2 lg:border-gray-900">
+          <div className="justify-center mt-9 md:mx-20 md:border-2 md:border-gray-900 md:rounded-md lg:mx-[25%]">
+            <p className="text-3xl font-bold mx-9 md:text-2xl text-center lg:text-xl pb-5 py-1 border-b-2 md:py-2 md:mb-2 border-gray-900">
               Rules for the Coupon Retrieval
             </p>
-            <ul className="list-disc list-inside mx-5 text-xl md:text-2xl lg:text-xl font-semibold">
-              <li>
-                The discount code cannot be redeemed immediately upon receipt.
+            <ul className="list-disc my-5 list-inside mx-5 text-xl md:text-sm lg:text-sm font-semibold">
+              <li className='py-1 px-2'>
+                You will recieve your coupon code 3 hours from now.
+              </li>
+              <li className='py-1 px-2'>
+                The code cannot be redeemed immediately upon receipt.
                 It can only be used on your next purchase.
               </li>
-              <li>
+              <li className='py-1 px-2'>
                 Present your coupon code to our customer service agent at the
                 Benin City outlet along Sapele Road.
               </li>
-              <li>
+              <li className='py-1 px-2'>
                 Our agent will verify the validity of your coupon code through
                 our Coupon Redemption Portal.
               </li>
-              <li>
+              <li className='py-1 px-2'>
                 If your coupon code is verified, the agent will give it to the
                 cashier at the point of sale.
               </li>
-              <li>The discount will be applied to your purchase.</li>
-              <li>
+              <li className='py-1 px-2'>The discount will be applied to your purchase.</li>
+              <li className='py-1 px-2'>
                 Please note that the coupon code can only be redeemed at the
                 Benin City outlet along Sapele Road.
               </li>
             </ul>
           </div>
-          <div className="hero text-center">
+          {/* <div className="hero text-center">
             <div className="text-3xl font-black">
               <p>Click To Reveal Your Coupon Code</p>
             </div>
@@ -91,7 +94,7 @@ const CouponDegen = () => {
                 </span>
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

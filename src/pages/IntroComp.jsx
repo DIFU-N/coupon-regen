@@ -11,7 +11,7 @@ import {
 } from "../utils/InputValidations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "../components/Select";
-import Date from "../components/Date";
+import SelectDate from "../components/Date";
 import { db } from "../firebase";
 import {
   query,
@@ -27,6 +27,7 @@ import {
 import { parseISO } from "date-fns";
 import { generate } from "voucher-code-generator";
 import { setCouponCode } from "../app/coupon";
+import { setSubmitTime, setThreeHoursLater } from "../app/time";
 import { useDispatch, useSelector } from "react-redux";
 import PhoneInputField from "../components/PhoneNumber";
 import background from "../assets/WebpageG+.png";
@@ -47,12 +48,32 @@ const IntroComp = () => {
   const { control } = useForm({
     resolver: yupResolver(validationSchema),
   });
-
+  const [schedule, setSchedule] = useState("");
   const [users, setUsers] = useState(null);
   const dispatch = useDispatch();
+  const getTime = () => {
+    const timestamp = new Date().getTime();
+    const newTime = new Date(timestamp);
+    const offsetMs = newTime.getTimezoneOffset() * 60 * 1000; // get timezone offset in milliseconds
+    const adjustedTimestamp = timestamp - offsetMs; // adjust timestamp to UTC
+    const timeNow = new Date(adjustedTimestamp).toISOString().replace('T', ' ').substr(0, 16);
+    const threeHoursLater = new Date(adjustedTimestamp + 0.10 * 60 * 60 * 1000).toISOString().replace('T', ' ').substr(0, 16);
+    console.log(timeNow);
+    console.log(threeHoursLater);
+    const schedulingTime = new Date(threeHoursLater).toLocaleString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }).replace(',', '');
+
+    return schedulingTime;
+  }
   // create
   const onFormDataSubmitted = async (data) => {
-    console.log(data.birthday.toString());
     const voucherCode = generate({
       length: 5,
       count: 1,
@@ -62,8 +83,10 @@ const IntroComp = () => {
     const dateObject = parseISO(data.birthday.toString());
     const cleanedNumber = data.cell.replace(/^0?\s*|\s*/g, "");
     const phoneNumber = data.cell.startsWith("+234")
-      ? data.cell
-      : "+234" + cleanedNumber;
+    ? data.cell
+    : "+234" + cleanedNumber;
+    const editedNumber = phoneNumber.replace(/^(\+234)|\s*/g, "");
+    const textableNumber = "0" + editedNumber;
     try {
       await addDoc(collection(db, "user"), {
         name: data.name,
@@ -74,6 +97,15 @@ const IntroComp = () => {
         coupon: voucherCode[0],
         redeemed: false,
       });
+      const schedulingTime = getTime();
+    setTimeout(() => {
+      const sendSMSfxn = async () => {
+        const result = await sendSMS({ to: textableNumber , text: `Hello ${data.name}, your Coupon is ${voucherCode[0]}`, schedule: schedulingTime })
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+      }
+      sendSMSfxn();
+    }, [3000]);
       // 👇️ navigate to /coupon-degen
       navigate("/coupon-degen");
     } catch (error) {
@@ -135,14 +167,10 @@ const IntroComp = () => {
     });
   };
   const divStyle1 = {
-    // fontFamily: "Anton, sans-serif",
-    // fontFamily: 'Bebas Neue, cursive'
     fontFamily: "Barlow, sans-serif",
   };
   const divStyle = {
-    // fontFamily: "Anton, sans-serif",
     fontFamily: "Bebas Neue, cursive",
-    // fontFamily: "Barlow, sans-serif",
   };
   const containerVariants = {
     hidden: {
@@ -181,12 +209,6 @@ const IntroComp = () => {
       htmlPart: "html part?" });
     console.log(result);
   };
-  const sendSMSfxn = async () => {
-    const result = await sendSMS({ to: '09067711380', text: 'Stay Awesome.' })
-    .then((data) => console.log(data))
-  .catch((error) => console.error(error));
-  console.log(result);
-  }
   return (
     <div>
       <div className="w-full">
@@ -296,7 +318,7 @@ const IntroComp = () => {
                       validation={validationSchema}
                     />
                     <Select {...gender_validation} />
-                    <Date {...date_validation} />
+                    <SelectDate {...date_validation} />
                   </div>
                   <div>
                     <button
@@ -316,7 +338,7 @@ const IntroComp = () => {
                       </span>
                       Sign in
                     </button>
-                    <button onClick={sendSMSfxn}>delete all</button>
+                    <button onClick={deleteAllUsers}>delete all</button>
                   </div>
                 </form>
               </FormProvider>

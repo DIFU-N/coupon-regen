@@ -6,7 +6,7 @@ import {findInputError} from '../utils/FindInputError';
 import {IsFormInvalid} from '../utils/IsFormInvalid';
 import InputError from './InputError';
 
-const Date = ({name, id, validation, ...rest}) => {
+const SelectDate = ({name, id, validation, ...rest}) => {
     const {control, register, formState: {errors}} = useFormContext();
 
     const inputError = findInputError(errors, name);
@@ -41,4 +41,4 @@ const Date = ({name, id, validation, ...rest}) => {
     );
 };
 
-export default Date;
+export default SelectDate;
