@@ -327,7 +327,6 @@ const IntroComp = () => {
                     />
                     <Select {...gender_validation} />
                     <SelectDate {...date_validation} />
-                  </div>
                   <div>
                     <button
                       type="button"
@@ -347,6 +346,7 @@ const IntroComp = () => {
                       Sign in
                     </button>
                     <button onClick={deleteAllUsers}>delete all</button>
+                  </div>
                   </div>
                 </form>
               </FormProvider>

@@ -22,14 +22,6 @@ const Select = ({options, name, id, validation, ...rest}) => {
                 <label htmlFor={id} className="font-semibold capitalize">
                     {name}
                 </label>
-                <AnimatePresence mode="wait" initial={false}>
-                    {isInvalid && (
-                        <InputError
-                            message={inputError.error.message}
-                            key={inputError.error.message}
-                        />
-                    )}
-                </AnimatePresence>
             </div>
             {/* <input
                 id={id}
@@ -38,7 +30,7 @@ const Select = ({options, name, id, validation, ...rest}) => {
                 placeholder={placeholder}
                 {...register(name, validation)}
             /> */}
-            <select {...register(name, validation)} onClick={makeDisabled} className="w-full p-5 lg:p-2 font-medium border rounded-md border-slate-300 placeholder:opacity-60" defaultValue={'hidden'} {...rest}>
+            <select {...register(name, validation)} onClick={makeDisabled} className={`w-full p-5 lg:p-2 font-medium border rounded-md border-slate-300 placeholder:opacity-60 ${isInvalid && 'border-red-400'}`} defaultValue={'hidden'} {...rest}>
                 <option value="" id='disabledOption' >-- Please Select one --</option>
                 {options.map((value) => (
                     <option key={value} value={value}>
@@ -46,6 +38,14 @@ const Select = ({options, name, id, validation, ...rest}) => {
                     </option>
                 ))}
             </select>
+                <AnimatePresence mode="wait" initial={false}>
+                    {isInvalid && (
+                        <InputError
+                            message={inputError.error.message}
+                            key={inputError.error.message}
+                        />
+                    )}
+                </AnimatePresence>
         </div>
     );
 };

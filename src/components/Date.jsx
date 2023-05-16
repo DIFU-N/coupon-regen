@@ -17,6 +17,17 @@ const SelectDate = ({name, id, validation, ...rest}) => {
                 <label htmlFor={id} className="font-semibold capitalize">
                     {name}
                 </label>
+            </div>
+            <div className='relative'>
+                <input
+                    className={`w-full p-5 lg:p-2 font-medium border rounded-md border-slate-300 placeholder:opacity-60 ${isInvalid && 'border-red-400'}`}
+                    type="date"
+                    id="birthday"
+                    name="birthday"
+                    // onFocus={this.showPicker()}
+                    onClick={(e) => e.target.focus()}
+                    {...register(name, validation)}
+                />
                 <AnimatePresence mode="wait" initial={false}>
                     {isInvalid && (
                         <InputError
@@ -25,17 +36,6 @@ const SelectDate = ({name, id, validation, ...rest}) => {
                         />
                     )}
                 </AnimatePresence>
-            </div>
-            <div className='relative'>
-                <input
-                    className="w-full p-5 lg:p-2 font-medium border rounded-md border-slate-300 placeholder:opacity-60"
-                    type="date"
-                    id="birthday"
-                    name="birthday"
-                    // onFocus={this.showPicker()}
-                    onClick={(e) => e.target.focus()}
-                    {...register(name, validation)}
-                />
             </div>
         </div>
     );

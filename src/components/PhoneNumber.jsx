@@ -24,14 +24,6 @@ const PhoneInputField = ({name, label, validation}) => {
         <label htmlFor={name} className="font-semibold capitalize">
           {label}
         </label>
-        <AnimatePresence mode="wait" initial={false}>
-          {isInvalid && (
-            <InputError
-              message={inputError.error.message}
-              key={inputError.error.message}
-            />
-          )}
-        </AnimatePresence>
       </div>
       <Controller
         control={control}
@@ -48,8 +40,16 @@ const PhoneInputField = ({name, label, validation}) => {
               defaultCountry="NG"
               id="phone-input"
               limitMaxLength={true}
-              className="w-full p-5 lg:p-2 font-medium border rounded-md border-slate-300 placeholder:opacity-60"
+              className={`w-full p-5 lg:p-2 font-medium border rounded-md border-slate-300 placeholder:opacity-60 ${isInvalid && 'border-red-400'}`}
             />
+        <AnimatePresence mode="wait" initial={false}>
+          {isInvalid && (
+            <InputError
+              message={inputError.error.message}
+              key={inputError.error.message}
+            />
+          )}
+        </AnimatePresence>
           </>
         )}
       />
